@@ -1,5 +1,5 @@
-vendor/
-user_guide/
+node_modules
+/dist
 
 .DS_Store
 
@@ -13,6 +13,7 @@ application/logs/*
 
 composer.lock
 
+user_guide/
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
 user_guide_src/cilexer/dist/*
@@ -23,6 +24,12 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 #-------------------------
 /nbproject/
 .idea/*
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
 ## Sublime Text cache files
 *.tmlanguage.cache
@@ -32,3 +39,15 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-project
 /tests/tests/
 /tests/results/
+
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
