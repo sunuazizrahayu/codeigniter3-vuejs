@@ -13,4 +13,34 @@ services:
       - /var/www/html/node_modules
     ports:
       - 80:80
+      #- 8080:8080
+
+  frontend:
+    container_name: codeigniter3-vuejs_frontend
+    image: codeigniter3-vuejs_frontend
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.vue
+    volumes:
+      - ./client:/app/client
+      - ./babel.config.js:/app/babel.config.js
+      - ./package.json:/app/package.json
+      - ./vue.config.js:/app/vue.config.js
+    ports:
       - 8080:8080
+
+  # frontend:
+  #   image: node:lts-alpine3.13
+  #   container_name: codeigniter3-vuejs_frontend
+  #   user: ${UID}:${UID}
+  #   working_dir: /app
+  #   volumes:
+  #     - ./client:/app/client
+  #     - ./babel.config.js:/app/babel.config.js
+  #     - ./package.json:/app/package.json
+  #     - ./vue.config.js:/app/vue.config.js
+  #   environment:
+  #     NODE_ENV: development
+  #   command: "npm install; npm run serve"
+  #   ports:
+  #     - 8080:8080
