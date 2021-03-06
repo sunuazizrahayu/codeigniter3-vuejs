@@ -1,4 +1,4 @@
-FROM alpine:3.13
+FROM node:lts-alpine3.13
 LABEL Maintainer="Tim de Pater <code@trafex.nl>" \
       Description="Lightweight container with Nginx 1.18 & PHP 7.4 based on Alpine Linux."
 
