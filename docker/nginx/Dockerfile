@@ -21,6 +21,12 @@ COPY docker/nginx/config/supervisord.conf /etc/supervisor/conf.d/supervisord.con
 # Setup document root
 RUN mkdir -p /var/www/html
 
+
+# NodeJS
+WORKDIR /var/www/html
+COPY package.json /var/www/html/
+RUN npm install
+
 # Make sure files/folders needed by the processes are accessable when they run under the nobody user
 RUN chown -R nobody.nobody /var/www/html && \
   chown -R nobody.nobody /run && \
