@@ -3,10 +3,10 @@ LABEL Maintainer="Tim de Pater <code@trafex.nl>" \
       Description="Lightweight container with Nginx 1.18 & PHP 7.4 based on Alpine Linux."
 
 # Install packages and remove default server definition
-RUN apk add php7 php7-fpm php7-opcache php7-mysqli php7-json php7-openssl php7-curl \
+RUN apk --no-cache add php7 php7-fpm php7-opcache php7-mysqli php7-json php7-openssl php7-curl \
     php7-zlib php7-xml php7-phar php7-intl php7-dom php7-xmlreader php7-ctype php7-session \
-    php7-mbstring php7-gd nginx supervisor curl && \
-    rm /etc/nginx/conf.d/default.conf
+    php7-mbstring php7-gd curl nginx \
+    supervisor && rm /etc/nginx/conf.d/default.conf
 
 # Configure nginx
 COPY docker/nginx/config/nginx.conf /etc/nginx/nginx.conf
@@ -23,9 +23,9 @@ RUN mkdir -p /var/www/html
 
 
 # NodeJS
-WORKDIR /var/www/html
-COPY package.json /var/www/html/
-RUN npm install
+#WORKDIR /var/www/html
+#COPY package*.json /var/www/html/
+#RUN npm install
 
 # Make sure files/folders needed by the processes are accessable when they run under the nobody user
 RUN chown -R nobody.nobody /var/www/html && \
@@ -41,10 +41,10 @@ WORKDIR /var/www/html
 COPY --chown=nobody ./ /var/www/html/
 
 # Expose the port nginx is reachable on
-EXPOSE 8080
+EXPOSE 80
 
 # Let supervisord start nginx & php-fpm
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
 # Configure a healthcheck to validate that everything is up&running
-HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:8080/fpm-ping
+HEALTHCHECK --timeout=10s CMD curl --silent --fail http://127.0.0.1:80/fpm-ping

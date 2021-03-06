@@ -1,0 +1,16 @@
+version: '3.5'
+
+services:
+  php:
+    container_name: codeigniter3-vuejs
+    image: codeigniter3-vuejs
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    volumes:
+      - .:/var/www/html
+      - /var/www/html/application/vendor
+      - /var/www/html/node_modules
+    ports:
+      - 80:80
+      - 8080:8080

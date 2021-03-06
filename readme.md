@@ -12,6 +12,10 @@ Run
 docker run --name=codeigniter3-vue -d -p 8080:8080 -v=$(pwd):/var/www/html codeigniter3-vue
 ```
 
+## Docker-Compose
+```
+docker-compose -f docker-compose.yml up -d --build
+```
 
 ## VueJS
 ### Project setup
