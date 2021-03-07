@@ -20,6 +20,14 @@ docker-compose -f docker-compose.yml up -d --build
 docker-compose up --build --remove-orphans
 ```
 
+### Logging
+```
+docker-compose logs -f frontend
+or
+docker-compose logs -f php
+```
+
+
 ## VueJS
 ### Project setup
 ```
