@@ -1,7 +1,17 @@
 version: '3.5'
 
 services:
-  php:
+  www:
+    image: nginx:alpine
+    volumes:
+      - ./docker/nginx.dev:/etc/nginx/conf.d/default.conf
+    ports:
+      - 8080:80
+    depends_on:
+      - backend
+      - frontend
+
+  backend:
     container_name: codeigniter3-vuejs
     image: codeigniter3-vuejs
     build:
@@ -11,8 +21,7 @@ services:
       - .:/var/www/html
       - /var/www/html/application/vendor
     ports:
-      - 80:80
-      #- 8080:8080
+      - 8081:80
 
   frontend:
     container_name: codeigniter3-vuejs_frontend
@@ -25,20 +34,4 @@ services:
       - ./package.json:/app/package.json
       - ./public:/app/public
     ports:
-      - 8080:8080
-
-  # frontend:
-  #   image: node:lts-alpine3.13
-  #   container_name: codeigniter3-vuejs_frontend
-  #   user: ${UID}:${UID}
-  #   working_dir: /app
-  #   volumes:
-  #     - ./client:/app/client
-  #     - ./babel.config.js:/app/babel.config.js
-  #     - ./package.json:/app/package.json
-  #     - ./vue.config.js:/app/vue.config.js
-  #   environment:
-  #     NODE_ENV: development
-  #   command: "npm install; npm run serve"
-  #   ports:
-  #     - 8080:8080
+      - 8082:8080
