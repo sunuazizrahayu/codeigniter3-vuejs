@@ -27,5 +27,5 @@ module.exports = {
     //       poll: true
     //   },
     //   proxy: 'http://localhost:8080/api',
-    }
+    // }
 }
